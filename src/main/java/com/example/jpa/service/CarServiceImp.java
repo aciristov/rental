@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,17 +46,17 @@ public class CarServiceImp implements CarService{
 
     @Override
     public Optional<Car> findById(Long id) {
-        return Optional.empty();
+        return carRepository.findById(id);
     }
 
     @Override
     public void update(Long id, Car car) {
-
+        carRepository.save(car);
     }
 
     @Override
     public void delete(Car c) {
-
+        carRepository.delete(c);
     }
 
     @Override
