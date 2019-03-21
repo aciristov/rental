@@ -24,6 +24,7 @@ public class CarEquipment {
     private Date end_date;
 
     public CarEquipment(){}
+
     public CarEquipment(long id, long carid, long equipmentid, Date start_date, Date end_date){
         this.id = id;
         this.carid = id;

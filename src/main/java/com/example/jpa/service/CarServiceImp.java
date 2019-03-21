@@ -1,15 +1,13 @@
 package com.example.jpa.service;
 
 import com.example.jpa.model.*;
-import com.example.jpa.repository.CarEquipmentRepository;
-import com.example.jpa.repository.CarRepository;
-import com.example.jpa.repository.CategoryRepository;
-import com.example.jpa.repository.CustomerRepository;
+import com.example.jpa.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +27,9 @@ public class CarServiceImp implements CarService{
     @Autowired
     CarEquipmentRepository carEquipmentRepository;
 
+    @Autowired
+    EquipmentRepository equipmentRepository;
+
     @Override
     public Page<Car> findAll(Pageable pageable) {
         return carRepository.findAll(pageable);
@@ -47,6 +48,16 @@ public class CarServiceImp implements CarService{
     @Override
     public Optional<Car> findById(Long id) {
         return Optional.empty();
+    }
+
+    @Override
+    public void update(Long id, Car car) {
+
+    }
+
+    @Override
+    public void delete(Car c) {
+
     }
 
     @Override
@@ -73,14 +84,23 @@ public class CarServiceImp implements CarService{
         return car;
     }
 
-    /*
-    * TODO getEquipment(s) method
-     */
-
     @Override
     public List<CarEquipmentPojos> getEquipment(Long carid) {
+        List<CarEquipmentPojos> carEquipmentPojos = new ArrayList<>();
+        List<CarEquipment> carEquipments = carEquipmentRepository.findByCarId(carid);
 
-        return null;
-
+        for (CarEquipment carEquipment: carEquipments){
+            Optional<Equipment> equipmentOptional = equipmentRepository.findById(carEquipment.getEquipmentid());
+            equipmentOptional.ifPresent(equipment -> {
+                CarEquipmentPojos carEquipmentPojos1 = new CarEquipmentPojos(
+                        equipment.getId(),
+                        equipment.getName(),
+                        carEquipment.getStart_date(),
+                        carEquipment.getEnd_date()
+                );
+                carEquipmentPojos.add(carEquipmentPojos1);
+            });
+        }
+        return carEquipmentPojos;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.jpa.model;
 
+import java.util.Date;
+
 public class CarEquipmentPojos {
 
 
@@ -7,13 +9,15 @@ public class CarEquipmentPojos {
     private String color;
     private String name;
     private int mileage;
+    private Date start_date;
+    private Date end_date;
 
     public CarEquipmentPojos(){}
-    public CarEquipmentPojos(Long equipmentid, String color, String name, int mileage){
+    public CarEquipmentPojos(Long equipmentid, String name, Date start_date, Date end_date){
         this.equipmentid = equipmentid;
-        this.color = color;
         this.name = name;
-        this.mileage = mileage;
+        this.start_date = start_date;
+        this.end_date = end_date;
     }
 
     public long getEquipmentid() {
@@ -46,5 +50,21 @@ public class CarEquipmentPojos {
 
     public void setMileage(int mileage) {
         this.mileage = mileage;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
+    public Date getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
 }
