@@ -1,7 +1,3 @@
-# Hibernate One to Many Mapping Example with Spring Boot and JPA
-
-Read the Tutorial - https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-many-mapping-example/
-
 ## Setup the Application
 
 1. Create a database named `hibernate_one_to_many_demo`.
